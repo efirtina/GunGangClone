@@ -3,11 +3,11 @@ using UnityEngine;
 public class SoldierController : MonoBehaviour
 {
     protected StateMachine<SoldierController> _stateMachine;
-    protected SoldierIdle _idleState;
-    protected SoldierRunning _runningState;
-    protected SoldierShooting _shootingState;
-    protected SoldierCrouch _crouchingState;
-    protected SoldierCrouchShooting _crouchShootingState;
+    public SoldierIdle _idleState { get; private set; }
+    public SoldierRunning _runningState { get; private set; }
+    public SoldierShooting _shootingState { get; private set; }
+    public SoldierCrouch _crouchingState { get; private set; }
+    public SoldierCrouchShooting _crouchShootingState { get; private set; }
 
 
     protected virtual void Start()

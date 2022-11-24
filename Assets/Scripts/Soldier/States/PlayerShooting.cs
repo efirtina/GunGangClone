@@ -19,4 +19,13 @@ public class PlayerShooting : SoldierShooting
         base.OnUpdate();
         _player._playerMovement.Move();
     }
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StateMachine.ChangeState(Owner._idleState);
+        }
+    }
 }

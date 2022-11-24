@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : SoldierController
 {
-    private PlayerShooting _playerShootingState;
+    public PlayerShooting _playerShootingState { get; private set; }
     [field: SerializeField] public PlayerMovement _playerMovement { get; private set; }
     protected override void Start()
     {
