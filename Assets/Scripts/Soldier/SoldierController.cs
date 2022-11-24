@@ -9,10 +9,13 @@ public class SoldierController : MonoBehaviour
     protected SoldierCrouch _crouchingState;
     protected SoldierCrouchShooting _crouchShootingState;
 
-    protected virtual void Start()
+    protected void Awake()
     {
         _stateMachine = new StateMachine<SoldierController>();
         InitializeStates();
+    }
+    protected virtual void Start()
+    {
         _stateMachine.InitializeStateMachine(_idleState, this);
     }
     protected virtual void Update()

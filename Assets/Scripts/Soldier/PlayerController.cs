@@ -7,6 +7,7 @@ public class PlayerController : SoldierController
     {
         _stateMachine = new StateMachine<SoldierController>();
         InitializeStates();
+        _playerShootingState = new PlayerShooting(_stateMachine);
         _stateMachine.InitializeStateMachine(_playerShootingState, this);
     }
 
