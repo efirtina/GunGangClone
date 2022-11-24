@@ -12,12 +12,10 @@ public class PlayerController : MonoBehaviour
         InitializeStates();
         _stateMachine.InitializeStateMachine(IdleState, this);
     }
-
     private void Update()
     {
         _stateMachine.CurrentState.OnUpdate();
     }
-
     private void InitializeStates()
     {
         IdleState = new PlayerIdle(_stateMachine);
@@ -33,6 +31,4 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Idle");
     }
-
-
 }
