@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 public class SoldierShooting : State<SoldierController>
@@ -15,6 +14,11 @@ public class SoldierShooting : State<SoldierController>
     {
         
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        _shootTimer = 0f;
+    }
     public override void OnUpdate()
     {
         base.OnUpdate();
@@ -24,11 +28,7 @@ public class SoldierShooting : State<SoldierController>
     public override void OnExit()
     {
         base.OnExit();
-        _shootTimer = 0f;
-    }
-    public override void DoChecks()
-    {
-        base.DoChecks();
+        _shootTimer = 1f;
     }
     protected void Shoot()
     {

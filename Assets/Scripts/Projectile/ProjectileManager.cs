@@ -21,10 +21,10 @@ public class ProjectileManager : MonoBehaviour
 
     public void OnPush(ProjectileController projectile)
     {
-        
+        //can be used for particle and sound effects
     }
     public void OnPull(ProjectileController projectile)
     {
-
+        //can be used for particle and sound effects
     }
 }
