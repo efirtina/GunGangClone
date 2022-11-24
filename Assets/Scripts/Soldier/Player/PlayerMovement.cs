@@ -9,12 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rightBoundry;
     private Vector3 _movementVector;
 
-    private void Update()
-    {
-        GetInputs();
-    }
-
-    private void GetInputs()
+    public void GetInputs()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
     }

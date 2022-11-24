@@ -17,6 +17,7 @@ public class PlayerShooting : SoldierShooting
     public override void OnUpdate()
     {
         base.OnUpdate();
+        _player._playerMovement.GetInputs();
         _player._playerMovement.Move();
     }
 
