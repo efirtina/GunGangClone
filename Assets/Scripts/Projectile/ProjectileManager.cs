@@ -13,9 +13,15 @@ public class ProjectileManager : MonoBehaviour
         ProjectilePool = new ObjectPool<ProjectileController>(_prefab, _poolSize, OnPull, OnPush);
     }
 
+    public void PullProjectile(Vector3 spawnPosition)
+    {
+        ProjectileController projectile = ProjectilePool.Pull();
+        projectile.SetPosition(spawnPosition);
+    }
+
     public void OnPush(ProjectileController projectile)
     {
-
+        
     }
     public void OnPull(ProjectileController projectile)
     {

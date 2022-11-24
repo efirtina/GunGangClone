@@ -8,7 +8,13 @@ public class SoldierController : MonoBehaviour
     public SoldierShooting _shootingState { get; private set; }
     public SoldierCrouch _crouchingState { get; private set; }
     public SoldierCrouchShooting _crouchShootingState { get; private set; }
+    public Transform SoldierTransform { get; private set; }
+    [field: SerializeField] public float _firingRate { get; private set; }
 
+    protected void Awake()
+    {
+        SoldierTransform = transform;
+    }
 
     protected virtual void Start()
     {

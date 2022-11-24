@@ -17,6 +17,10 @@ public class ProjectileController : MonoBehaviour, IPoolable<ProjectileControlle
     {
         _canMove = true;
     }
+    private void Start()
+    {
+        _direction = Vector3.forward;
+    }
     private void Update()
     {
         Move();
@@ -32,6 +36,10 @@ public class ProjectileController : MonoBehaviour, IPoolable<ProjectileControlle
     public void SetDirection(Vector3 direction)
     {
         _direction = direction;
+    }
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
     public void Move()
     {
