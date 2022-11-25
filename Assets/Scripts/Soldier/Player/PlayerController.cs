@@ -12,9 +12,4 @@ public class PlayerController : SoldierController
         _stateMachine.InitializeStateMachine(_playerShootingState, this);
         SoldierManager.Instance.AddSoldierToList(this);
     }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
 }

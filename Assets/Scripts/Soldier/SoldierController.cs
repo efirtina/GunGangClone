@@ -9,7 +9,10 @@ public class SoldierController : MonoBehaviour
     public SoldierCrouch _crouchingState { get; private set; }
     public SoldierCrouchShooting _crouchShootingState { get; private set; }
     [field: SerializeField] public SoldierFiring _soldierFiring { get; private set; }
+    [field: SerializeField] public SoldierCollision _soldierCollision { get; private set; }
     public Transform SoldierTransform { get; private set; }
+    
+
 
     protected void Awake()
     {
