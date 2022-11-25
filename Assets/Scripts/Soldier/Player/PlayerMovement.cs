@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _horizontalSpeed;
     private float _boundry;
     private Vector3 _movementVector;
+    private SoldierManager _soldierManager;
 
     private void Start()
     {
         _boundry = LevelManager.Instance.GetLevelBoundry();
+        _soldierManager = SoldierManager.Instance;
     }
 
     public void GetInputs()
@@ -22,7 +24,15 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementVector.z += _forwardSpeed * Time.deltaTime;
         _movementVector.x += _horizontalInput * _horizontalSpeed * Time.deltaTime;
-        _movementVector.x = Mathf.Clamp(_movementVector.x, _boundry * -1f, _boundry);
+        _movementVector.x = Mathf.Clamp(_movementVector.x, _boundry * -1f + CalculateLeftDiff(), _boundry + CalculateRightDiff());
         transform.position = _movementVector;
+    }
+    private float CalculateLeftDiff()
+    {
+        return transform.position.x - _soldierManager.GetLeftmostPosition().x;
+    }
+    private float CalculateRightDiff()
+    {
+        return transform.position.x - _soldierManager.GetRightmostPosition().x;
     }
 }
