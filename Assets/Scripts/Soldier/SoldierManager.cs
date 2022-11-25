@@ -30,4 +30,9 @@ public class SoldierManager : MonoBehaviour
     {
         return _soldiers[0];
     }
+
+    public bool IsContains(SoldierController soldier)
+    {
+        return _soldiers.Contains(soldier);
+    }
 }

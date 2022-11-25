@@ -24,6 +24,5 @@ public class SoldierIdle : State<SoldierController>
     {
         base.OnExit();
         Owner._soldierCollision.SetCollisionEnter(null);
-        Owner.SoldierRigidbody.useGravity = false;
     }
 }

@@ -9,6 +9,10 @@ public class SoldierShooting : State<SoldierController>
     public override void OnEnter()
     {
         base.OnEnter();
+        SoldierManager.Instance.AddSoldierToList(Owner);
+        Owner.ResetYPosition();
+        Owner.SoldierRigidbody.useGravity = false;
+        Owner._soldierCollision.SetIsTrigger(true);
         if(_firing == null)
         {
             _firing = Owner._soldierFiring;
@@ -24,6 +28,7 @@ public class SoldierShooting : State<SoldierController>
     public override void OnExit()
     {
         base.OnExit();
+        Owner._soldierCollision.SetTriggerEnter(null);
         _firing.SetShootTimer(1f);
     }
     

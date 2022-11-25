@@ -39,7 +39,14 @@ public class SoldierController : MonoBehaviour
     }
     public void RunToTarget(Vector3 position)
     {
-        transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 3f);
+        //
+        transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 10f);
         Debug.Log("test");
+    }
+    public void ResetYPosition()
+    {
+        var pos = SoldierTransform.position;
+        pos.y = 0f;
+        SoldierTransform.position = pos;
     }
 }

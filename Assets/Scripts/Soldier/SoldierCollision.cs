@@ -3,8 +3,14 @@ using UnityEngine;
 
 public class SoldierCollision : MonoBehaviour
 {
+    private Collider _collider;
     private Action<Collider> TriggerEnter;
     private Action<Collision> CollisionEnter;
+
+    private void Start()
+    {
+        _collider = GetComponent<Collider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,5 +30,10 @@ public class SoldierCollision : MonoBehaviour
     public void SetCollisionEnter(Action<Collision> action)
     {
         CollisionEnter = action;
+    }
+
+    public void SetIsTrigger(bool value)
+    {
+        _collider.isTrigger = value;
     }
 }

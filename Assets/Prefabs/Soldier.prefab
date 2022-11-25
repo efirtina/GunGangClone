@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5595430287303300023, guid: 231e841249626764bb573e3956653866, type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4727882450862278883, guid: 231e841249626764bb573e3956653866, type: 3}
     - {fileID: 4727882450862278894, guid: 231e841249626764bb573e3956653866, type: 3}
@@ -77,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_soldierFiring>k__BackingField: {fileID: 805969207128575387}
+  <_soldierCollision>k__BackingField: {fileID: 0}
 --- !u!114 &805969207128575387 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4727882450862278882, guid: 231e841249626764bb573e3956653866, type: 3}

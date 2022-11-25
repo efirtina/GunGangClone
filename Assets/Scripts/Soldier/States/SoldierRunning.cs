@@ -3,6 +3,7 @@ using UnityEngine;
 public class SoldierRunning : State<SoldierController>
 {
     private Transform _targetTransform;
+    private bool _isReachedToTarget;
 
     public SoldierRunning(StateMachine<SoldierController> stateMachine) : base(stateMachine)
     {
@@ -11,8 +12,18 @@ public class SoldierRunning : State<SoldierController>
     public override void OnEnter()
     {
         base.OnEnter();
+        var rigidbody = Owner.SoldierRigidbody;
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.useGravity = false;
         _targetTransform = SoldierManager.Instance.GetFirstSoldier().transform;
-        Debug.Log("test 3");
+        Owner._soldierCollision.SetTriggerEnter(OnTriggerEnter);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Soldier")) return;
+        if (!SoldierManager.Instance.IsContains(other.GetComponent<SoldierController>())) return;
+        _isReachedToTarget = true;
     }
 
     public override void OnUpdate()
@@ -21,10 +32,16 @@ public class SoldierRunning : State<SoldierController>
         Owner.RunToTarget(_targetTransform.position);
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+        Owner._soldierCollision.SetCollisionEnter(null);
+    }
+
     public override void DoChecks()
     {
         base.DoChecks();
-        if(Vector3.Distance(Owner.SoldierTransform.position, _targetTransform.position) <= 1f)
+        if(_isReachedToTarget)
         {
             Owner.SoldierTransform.parent = _targetTransform;
             StateMachine.ChangeState(Owner._shootingState);
