@@ -28,7 +28,7 @@ public class ObjectPool<T> : IPool<T> where T : MonoBehaviour, IPoolable<T>
         T poolObject;
         for (int i = 0; i < poolSize; i++)
         {
-            poolObject = GameObject.Instantiate(_prefab).GetComponent<T>();
+            poolObject = GameObject.Instantiate(_prefab);
             _objectPool.Push(poolObject);
             poolObject.gameObject.SetActive(false);
             poolObject.Initialize(Push);
