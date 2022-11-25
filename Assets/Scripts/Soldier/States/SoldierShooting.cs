@@ -2,40 +2,29 @@ using UnityEngine;
 
 public class SoldierShooting : State<SoldierController>
 {
-    protected float _shootTimer;
-    protected float Cooldown
-    { 
-        get
-        {
-            return 1 / Owner._firingRate;
-        } 
-    }
+    protected SoldierFiring _firing;
     public SoldierShooting(StateMachine<SoldierController> stateMachine) : base(stateMachine)
     {
-        
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        _shootTimer = 0f;
+        if(_firing == null)
+        {
+            _firing = Owner._soldierFiring;
+        }
+        _firing.ResetShootTimer();
     }
     public override void OnUpdate()
     {
         base.OnUpdate();
-        _shootTimer -= Time.deltaTime;
-        Shoot();
+        _firing.DoCountdown();
+        _firing.Shoot();
     }
     public override void OnExit()
     {
         base.OnExit();
-        _shootTimer = 1f;
+        _firing.SetShootTimer(1f);
     }
-    protected void Shoot()
-    {
-        if(_shootTimer <= 0)
-        {
-            ProjectileManager.Instance.PullProjectile(Owner.SoldierTransform.position);
-            _shootTimer = Cooldown;
-        }
-    }
+    
 }
