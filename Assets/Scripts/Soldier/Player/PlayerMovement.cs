@@ -6,13 +6,30 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _horizontalSpeed;
     private float _boundry;
+    private float _leftDiff;
+    private float _rightDiff;
     private Vector3 _movementVector;
     private SoldierManager _soldierManager;
+
+    private void OnEnable()
+    {
+        _soldierManager.OnSoldierAdded += CalculateDiffs;
+        _soldierManager.OnSoldierDestroy += CalculateDiffs;     
+    }
+    private void OnDisable()
+    {
+        _soldierManager.OnSoldierAdded -= CalculateDiffs;
+        _soldierManager.OnSoldierDestroy -= CalculateDiffs;
+    }
+
+    private void Awake()
+    {
+        _soldierManager = SoldierManager.Instance;
+    }
 
     private void Start()
     {
         _boundry = LevelManager.Instance.GetLevelBoundry();
-        _soldierManager = SoldierManager.Instance;
     }
 
     public void GetInputs()
@@ -24,15 +41,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementVector.z += _forwardSpeed * Time.deltaTime;
         _movementVector.x += _horizontalInput * _horizontalSpeed * Time.deltaTime;
-        _movementVector.x = Mathf.Clamp(_movementVector.x, _boundry * -1f + CalculateLeftDiff(), _boundry + CalculateRightDiff());
+        _movementVector.x = Mathf.Clamp(_movementVector.x, _boundry * -1f + _leftDiff, _boundry + _rightDiff);
         transform.position = _movementVector;
     }
-    private float CalculateLeftDiff()
+    private void CalculateDiffs()
     {
-        return transform.position.x - _soldierManager.GetLeftmostPosition().x;
-    }
-    private float CalculateRightDiff()
-    {
-        return transform.position.x - _soldierManager.GetRightmostPosition().x;
+        _leftDiff = transform.position.x - _soldierManager.GetLeftmostPosition().x;
+        _rightDiff = transform.position.x - _soldierManager.GetRightmostPosition().x;
     }
 }

@@ -12,7 +12,7 @@ public class SoldierController : MonoBehaviour
     [field: SerializeField] public SoldierCollision _soldierCollision { get; private set; }
     public Transform SoldierTransform { get; private set; }
     public Rigidbody SoldierRigidbody { get; private set; }
-    
+
     protected void Awake()
     {
         SoldierTransform = transform;
@@ -39,9 +39,7 @@ public class SoldierController : MonoBehaviour
     }
     public void RunToTarget(Vector3 position)
     {
-        //
         transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 10f);
-        Debug.Log("test");
     }
     public void ResetYPosition()
     {

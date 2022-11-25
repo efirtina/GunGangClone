@@ -10,6 +10,6 @@ public class PlayerController : SoldierController
         InitializeStates();
         _playerShootingState = new PlayerShooting(_stateMachine);
         _stateMachine.InitializeStateMachine(_playerShootingState, this);
-        SoldierManager.Instance.AddSoldierToList(this);
+        //SoldierManager.Instance.AddSoldierToList(this);
     }
 }

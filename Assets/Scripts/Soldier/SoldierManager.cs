@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class SoldierManager : MonoBehaviour
     private List<SoldierController> _soldiers;
     private Transform _leftmostSoldier;
     private Transform _rightmostSoldier;
+    public Action OnSoldierDestroy;
+    public Action OnSoldierAdded;
 
     private void Awake()
     {
@@ -22,18 +25,14 @@ public class SoldierManager : MonoBehaviour
     public void AddSoldierToList(SoldierController soldier)
     {
         _soldiers.Add(soldier);
-        if (CheckIfLeftmost(soldier.transform))
-        {
-            _leftmostSoldier = soldier.transform;
-        }
-        if (CheckIfRightmost(soldier.transform))
-        {
-            _rightmostSoldier = soldier.transform;
-        }
+        CheckIfLeftmostRightmost(soldier);
+        OnSoldierAdded?.Invoke();
     }
     public void RemoveSoldierFromList(SoldierController soldier)
     {
         _soldiers.Remove(soldier);
+        ReCalculateLeftmostRightmost();
+        OnSoldierDestroy?.Invoke();
     }
 
     public SoldierController GetFirstSoldier()
@@ -58,6 +57,28 @@ public class SoldierManager : MonoBehaviour
         if (soldier.position.x > _rightmostSoldier.position.x) return true;
         return false;
     }
+    private void ReCalculateLeftmostRightmost()
+    {
+        _leftmostSoldier = null;
+        _rightmostSoldier = null;
+        foreach (var soldier in _soldiers)
+        {
+            CheckIfLeftmostRightmost(soldier);
+        }
+    }
+
+    private void CheckIfLeftmostRightmost(SoldierController soldier)
+    {
+        if (CheckIfLeftmost(soldier.transform))
+        {
+            _leftmostSoldier = soldier.transform;
+        }
+        if (CheckIfRightmost(soldier.transform))
+        {
+            _rightmostSoldier = soldier.transform;
+        }
+    }
+
     public Vector3 GetLeftmostPosition()
     {
         return _leftmostSoldier.position;
