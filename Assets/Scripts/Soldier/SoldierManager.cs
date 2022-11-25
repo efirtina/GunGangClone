@@ -25,4 +25,9 @@ public class SoldierManager : MonoBehaviour
     {
         _soldiers.Remove(soldier);
     }
+
+    public SoldierController GetFirstSoldier()
+    {
+        return _soldiers[0];
+    }
 }
