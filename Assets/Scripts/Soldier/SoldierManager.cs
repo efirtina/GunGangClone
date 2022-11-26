@@ -125,4 +125,19 @@ public class SoldierManager : MonoBehaviour
             return null;
         }
     }
+
+    public void UnParentAllSoldiers()
+    {
+        for (int i = 1; i < _soldiers.Count; i++)
+        {
+            _soldiers[i].transform.SetParent(null);
+        }
+    }
+    public void SetParentForAllSoldiers()
+    {
+        for (int i = 1; i < _soldiers.Count; i++)
+        {
+            _soldiers[i].transform.SetParent(_soldiers[0].transform);
+        }
+    }
 }
