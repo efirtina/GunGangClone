@@ -44,6 +44,7 @@ public class SoldierManager : MonoBehaviour
         CheckIfLeftmostRightmost(soldier);
         OnSoldierAdded?.Invoke();
     }
+
     public void RemoveSoldierFromList(SoldierController soldier)
     {
         _soldiers.Remove(soldier);
@@ -60,6 +61,7 @@ public class SoldierManager : MonoBehaviour
     {
         return _soldiers.Contains(soldier);
     }
+
     private bool CheckIfLeftmost(Transform soldier)
     {
         if (_leftmostSoldier == null) return true;
@@ -67,12 +69,14 @@ public class SoldierManager : MonoBehaviour
         return false;
         
     }
+
     private bool CheckIfRightmost(Transform soldier)
     {
         if (_rightmostSoldier == null) return true;
         if (soldier.position.x > _rightmostSoldier.position.x) return true;
         return false;
     }
+
     private void ReCalculateLeftmostRightmost()
     {
         _leftmostSoldier = null;
@@ -99,6 +103,7 @@ public class SoldierManager : MonoBehaviour
     {
         return _leftmostSoldier.position;
     }
+
     public Vector3 GetRightmostPosition()
     {
         return _rightmostSoldier.position;

@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         _movementVector.x = Mathf.Clamp(_movementVector.x, _boundry * -1f + _leftDiff, _boundry + _rightDiff);
         transform.position = _movementVector;
     }
+
     private void CalculateDiffs()
     {
         _leftDiff = transform.position.x - _soldierManager.GetLeftmostPosition().x;

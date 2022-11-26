@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoldierController : MonoBehaviour
@@ -44,7 +43,7 @@ public class SoldierController : MonoBehaviour
     }
     public void RunToTarget(Vector3 position)
     {
-        transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 2f);
+        transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 4f);
     }
     public void RunToTarget(Vector3 position, float speed)
     {

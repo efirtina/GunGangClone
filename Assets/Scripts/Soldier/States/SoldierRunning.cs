@@ -17,6 +17,7 @@ public class SoldierRunning : State<SoldierController>
         rigidbody.useGravity = false;
         _targetTransform = SoldierManager.Instance.GetFirstSoldier().transform;
         Owner._soldierCollision.SetTriggerEnter(OnTriggerEnter);
+        LevelManager.Instance.OnFinish += ChangeStateToIdle;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -26,11 +27,6 @@ public class SoldierRunning : State<SoldierController>
         _isReachedToTarget = true;
     }
 
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-        //Owner.RunToTarget(_targetTransform.position);
-    }
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
@@ -41,6 +37,12 @@ public class SoldierRunning : State<SoldierController>
     {
         base.OnExit();
         Owner._soldierCollision.SetCollisionEnter(null);
+        LevelManager.Instance.OnFinish -= ChangeStateToIdle;
+    }
+
+    private void ChangeStateToIdle()
+    {
+        StateMachine.ChangeState(Owner._idleState);
     }
 
     public override void DoChecks()

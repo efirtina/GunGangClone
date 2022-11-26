@@ -3,9 +3,11 @@ using UnityEngine;
 public class PlayerShooting : SoldierShooting
 {
     private PlayerController _player;
+
     public PlayerShooting(StateMachine<SoldierController> stateMachine) : base(stateMachine)
     {
     }
+
     public override void OnEnter()
     {
         base.OnEnter();
@@ -14,6 +16,7 @@ public class PlayerShooting : SoldierShooting
             _player = Owner.GetComponent<PlayerController>();
         }
     }
+
     public override void OnUpdate()
     {
         base.OnUpdate();

@@ -28,7 +28,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         Instance = this;
@@ -53,15 +52,14 @@ public class LevelManager : MonoBehaviour
         var rightPoint = leftPoint;
         rightPoint.x *= -1f;
         SoldierCrouch stateInstance;
-        Vector3 direction = (rightPoint - leftPoint);
-        Vector3 pos = leftPoint + direction / (soldiers.Count * 2);
+        float interpolator = 1f / soldiers.Count / 2f;
         for (int i = 0; i < soldiers.Count; i++)
         {
             stateInstance = soldiers[i]._crouchingState;
-            stateInstance.SetTargetPosition(pos);
+            stateInstance.SetTargetPosition(Vector3.Lerp(leftPoint, rightPoint, interpolator));
             soldiers[i].transform.SetParent(null);
             soldiers[i].ChangeState(soldiers[i]._crouchingState);
-            pos += direction / soldiers.Count;
+            interpolator += 1f / soldiers.Count;
         }
     }
 }
