@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : SoldierController
 {
     public PlayerShooting _playerShootingState { get; private set; }
-    public PlayerIdle _playerIdleState { get; private set }
+    public PlayerIdle _playerIdleState { get; private set; }
     [field: SerializeField] public PlayerMovement _playerMovement { get; private set; }
 
     private void OnEnable()
