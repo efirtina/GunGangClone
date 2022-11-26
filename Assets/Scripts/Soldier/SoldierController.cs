@@ -8,10 +8,21 @@ public class SoldierController : MonoBehaviour
     public SoldierShooting _shootingState { get; private set; }
     public SoldierCrouch _crouchingState { get; private set; }
     public SoldierCrouchShooting _crouchShootingState { get; private set; }
+    public SoldierDefeatIdle _defeatIdle { get; private set; }
     [field: SerializeField] public SoldierFiring _soldierFiring { get; private set; }
     [field: SerializeField] public SoldierCollision _soldierCollision { get; private set; }
     public Transform SoldierTransform { get; private set; }
     public Rigidbody SoldierRigidbody { get; private set; }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnGameOver += ChangeStateToDefeatIdle;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnGameOver -= ChangeStateToDefeatIdle;
+    }
 
     protected void Awake()
     {
@@ -39,6 +50,7 @@ public class SoldierController : MonoBehaviour
         _runningState = new SoldierRunning(_stateMachine);
         _shootingState = new SoldierShooting(_stateMachine);
         _crouchingState = new SoldierCrouch(_stateMachine);
+        _defeatIdle = new SoldierDefeatIdle(_stateMachine);
         _crouchShootingState = new SoldierCrouchShooting(_stateMachine);
     }
     public void RunToTarget(Vector3 position)
@@ -59,5 +71,9 @@ public class SoldierController : MonoBehaviour
     public void ChangeState(State<SoldierController> newState)
     {
         _stateMachine.ChangeState(newState);
+    }
+    private void ChangeStateToDefeatIdle()
+    {
+        ChangeState(_defeatIdle);
     }
 }
