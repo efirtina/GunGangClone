@@ -1841,6 +1841,10 @@ PrefabInstance:
       propertyPath: m_MatchWidthOrHeight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5738068887413546948, guid: 05a2f80c41a69ff4fb4276cf09021b54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05a2f80c41a69ff4fb4276cf09021b54, type: 3}
 --- !u!1001 &4727882450778125131
