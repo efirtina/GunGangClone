@@ -24,6 +24,12 @@ public class PlayerController : SoldierController
         _stateMachine.InitializeStateMachine(_playerIdleState, this);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        UIManager.Instance.UpdateProgressBar(SoldierTransform.position.z / LevelManager.Instance.GetFinishZ());
+    }
+
     private void StartShooting()
     {
         _stateMachine.ChangeState(_playerShootingState);

@@ -4,11 +4,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Action OnGameOver;
-    public Action OnGameStart;
     private StateMachine<GameManager> _gameStateMachine;
     public TapToPlayState _tapToPlayState { get; private set; }
     public PlayState _playState { get; set; }
+    public Action OnGameOver;
+    public Action OnGameStart;
 
     private void Awake()
     {

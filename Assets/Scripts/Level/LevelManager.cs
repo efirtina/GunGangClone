@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform _finishLine;
     private bool _isSomeoneReachedFinish;
     private bool _canInvokeEvent = true;
+    private float _minDistanceToFinish;
     public Action OnFinish;
 
     public bool IsSomeoneReachedFinish
@@ -31,6 +32,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        _minDistanceToFinish = 4f;
     }
 
     public float GetLevelBoundry()
@@ -40,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     public void CheckIfFinish(float zPosition)
     {
-        if(_finishLine.position.z - zPosition <= 4f)
+        if(_finishLine.position.z - zPosition <= _minDistanceToFinish)
         {
             IsSomeoneReachedFinish = true;
         }
@@ -61,5 +63,10 @@ public class LevelManager : MonoBehaviour
             soldiers[i].ChangeState(soldiers[i]._crouchingState);
             interpolator += 1f / soldiers.Count;
         }
+    }
+
+    public float GetFinishZ()
+    {
+        return _finishLine.position.z - _minDistanceToFinish;
     }
 }
