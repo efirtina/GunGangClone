@@ -113,4 +113,16 @@ public class SoldierManager : MonoBehaviour
     {
         LevelManager.Instance.SetCrouchingPositionsAndChangeStates(_soldiers);
     }
+
+    public SoldierController GetVictimSoldierToKill()
+    {
+        if (_soldiers.Count > 1)
+        {
+            return _soldiers[1];
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

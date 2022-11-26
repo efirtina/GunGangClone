@@ -68,6 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forwardSpeed: 5
   _horizontalSpeed: 5
+  _cameraSpeedMultiplier: 1.3
 --- !u!114 &4727882450862278882
 MonoBehaviour:
   m_ObjectHideFlags: 0

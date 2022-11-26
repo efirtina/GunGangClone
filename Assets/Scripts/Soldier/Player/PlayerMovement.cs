@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private float _horizontalInput;
     [SerializeField] private float _forwardSpeed;
     [SerializeField] private float _horizontalSpeed;
+    [SerializeField] private float _cameraSpeedMultiplier;
     private float _boundry;
     private float _leftDiff;
     private float _rightDiff;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _boundry = LevelManager.Instance.GetLevelBoundry();
+        Camera.main.GetComponent<CameraController>().SetFollowSpeed(_forwardSpeed * _cameraSpeedMultiplier);
     }
 
     public void GetInputs()
@@ -49,5 +51,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _leftDiff = transform.position.x - _soldierManager.GetLeftmostPosition().x;
         _rightDiff = transform.position.x - _soldierManager.GetRightmostPosition().x;
+    }
+
+    public void SetMovementVector(Vector3 newPosition)
+    {
+        _movementVector = newPosition;
     }
 }

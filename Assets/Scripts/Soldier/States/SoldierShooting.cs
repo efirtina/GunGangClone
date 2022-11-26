@@ -8,7 +8,7 @@ public class SoldierShooting : State<SoldierController>
     {
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
         {

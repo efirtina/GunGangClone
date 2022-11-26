@@ -4,6 +4,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offset;
+    [SerializeField] private float _followSpeed;
     private Transform _cameraTransform;
     private Vector3 _cameraPosition;
 
@@ -21,6 +22,11 @@ public class CameraController : MonoBehaviour
     {
         _cameraPosition = _target.position + _offset;
         _cameraPosition.x = 0f;
-        _cameraTransform.position = _cameraPosition;
+        _cameraTransform.position = Vector3.MoveTowards(_cameraTransform.position, _cameraPosition, Time.deltaTime * _followSpeed);
+    }
+
+    public void SetFollowSpeed(float value)
+    {
+        _followSpeed = value;
     }
 }

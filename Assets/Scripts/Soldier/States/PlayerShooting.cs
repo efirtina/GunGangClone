@@ -8,6 +8,21 @@ public class PlayerShooting : SoldierShooting
     {
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Obstacle")) return;
+        var victim = SoldierManager.Instance.GetVictimSoldierToKill();
+        if(victim == null)
+        {
+            GameManager.Instance.OnGameOver?.Invoke();
+            GameObject.Destroy(Owner);
+            return;
+        }
+        _player._playerMovement.SetMovementVector(victim.transform.position);
+        SoldierManager.Instance.RemoveSoldierFromList(victim);
+        GameObject.Destroy(victim.gameObject);
+    }
+
     public override void OnEnter()
     {
         base.OnEnter();
