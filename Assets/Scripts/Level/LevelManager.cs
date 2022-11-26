@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
         {
             stateInstance = soldiers[i]._crouchingState;
             stateInstance.SetTargetPosition(pos);
+            soldiers[i].transform.SetParent(null);
             soldiers[i].ChangeState(soldiers[i]._crouchingState);
             pos += direction / soldiers.Count;
         }

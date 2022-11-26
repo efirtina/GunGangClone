@@ -44,7 +44,7 @@ public class SoldierController : MonoBehaviour
     }
     public void RunToTarget(Vector3 position)
     {
-        transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 5f);
+        transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 2f);
     }
     public void RunToTarget(Vector3 position, float speed)
     {
