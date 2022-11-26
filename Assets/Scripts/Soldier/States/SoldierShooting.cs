@@ -8,6 +8,15 @@ public class SoldierShooting : State<SoldierController>
     {
     }
 
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            SoldierManager.Instance.RemoveSoldierFromList(Owner);
+            GameObject.Destroy(Owner.gameObject);
+        }
+    }
+
     public override void OnEnter()
     {
         base.OnEnter();
@@ -15,6 +24,7 @@ public class SoldierShooting : State<SoldierController>
         Owner.ResetYPosition();
         Owner.SoldierRigidbody.useGravity = false;
         Owner.SoldierRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        Owner._soldierCollision.SetTriggerEnter(OnTriggerEnter);
         Owner._soldierCollision.SetIsTrigger(true);
         if(_firing == null)
         {
