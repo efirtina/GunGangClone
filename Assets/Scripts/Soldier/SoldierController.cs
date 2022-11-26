@@ -29,6 +29,10 @@ public class SoldierController : MonoBehaviour
     {
         _stateMachine.CurrentState.OnUpdate();
     }
+    protected virtual void FixedUpdate()
+    {
+        _stateMachine.CurrentState.OnFixedUpdate();
+    }
     protected void InitializeStates()
     {
         _idleState = new SoldierIdle(_stateMachine);
@@ -40,6 +44,11 @@ public class SoldierController : MonoBehaviour
     public void RunToTarget(Vector3 position)
     {
         transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 10f);
+    }
+    public void RunToTarget(Vector3 position, float speed)
+    {
+        var direction = (position - transform.position).normalized;
+        SoldierRigidbody.velocity = direction * speed;
     }
     public void ResetYPosition()
     {

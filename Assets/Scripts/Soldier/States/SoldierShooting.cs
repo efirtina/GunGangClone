@@ -12,6 +12,7 @@ public class SoldierShooting : State<SoldierController>
         SoldierManager.Instance.AddSoldierToList(Owner);
         Owner.ResetYPosition();
         Owner.SoldierRigidbody.useGravity = false;
+        Owner.SoldierRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Owner._soldierCollision.SetIsTrigger(true);
         if(_firing == null)
         {

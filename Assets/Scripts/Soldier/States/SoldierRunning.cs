@@ -29,7 +29,12 @@ public class SoldierRunning : State<SoldierController>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        Owner.RunToTarget(_targetTransform.position);
+        //Owner.RunToTarget(_targetTransform.position);
+    }
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        Owner.RunToTarget(_targetTransform.position, 10f);
     }
 
     public override void OnExit()
