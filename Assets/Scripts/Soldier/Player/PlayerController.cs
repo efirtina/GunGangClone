@@ -3,13 +3,29 @@ using UnityEngine;
 public class PlayerController : SoldierController
 {
     public PlayerShooting _playerShootingState { get; private set; }
+    public PlayerIdle _playerIdleState { get; private set }
     [field: SerializeField] public PlayerMovement _playerMovement { get; private set; }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnGameStart += StartShooting;
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.OnGameStart -= StartShooting;
+    }
+
     protected override void Start()
     {
         _stateMachine = new StateMachine<SoldierController>();
         InitializeStates();
         _playerShootingState = new PlayerShooting(_stateMachine);
-        _stateMachine.InitializeStateMachine(_playerShootingState, this);
-        //SoldierManager.Instance.AddSoldierToList(this);
+        _playerIdleState = new PlayerIdle(_stateMachine);
+        _stateMachine.InitializeStateMachine(_playerIdleState, this);
+    }
+
+    private void StartShooting()
+    {
+        _stateMachine.ChangeState(_playerShootingState);
     }
 }
