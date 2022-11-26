@@ -11,6 +11,17 @@ public class SoldierManager : MonoBehaviour
     public Action OnSoldierDestroy;
     public Action OnSoldierAdded;
 
+    private void OnEnable()
+    {
+        if (LevelManager.Instance == null) return;
+        LevelManager.Instance.OnFinish += OnFinish;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.Instance.OnFinish -= OnFinish;
+    }
+
     private void Awake()
     {
         if(Instance == null)
@@ -20,6 +31,11 @@ public class SoldierManager : MonoBehaviour
             return;
         }
         Destroy(this.gameObject); 
+    }
+
+    private void Start()
+    {
+        LevelManager.Instance.OnFinish += OnFinish;
     }
 
     public void AddSoldierToList(SoldierController soldier)
@@ -88,4 +104,8 @@ public class SoldierManager : MonoBehaviour
         return _rightmostSoldier.position;
     }
 
+    private void OnFinish()
+    {
+        LevelManager.Instance.SetCrouchingPositionsAndChangeStates(_soldiers);
+    }
 }

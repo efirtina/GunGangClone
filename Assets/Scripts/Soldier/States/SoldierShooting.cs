@@ -32,5 +32,11 @@ public class SoldierShooting : State<SoldierController>
         Owner._soldierCollision.SetTriggerEnter(null);
         _firing.SetShootTimer(1f);
     }
-    
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        LevelManager.Instance.CheckIfFinish(Owner.SoldierTransform.position.z);
+    }
+
 }

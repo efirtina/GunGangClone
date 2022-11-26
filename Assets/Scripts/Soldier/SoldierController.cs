@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoldierController : MonoBehaviour
@@ -43,7 +44,7 @@ public class SoldierController : MonoBehaviour
     }
     public void RunToTarget(Vector3 position)
     {
-        transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 10f);
+        transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 5f);
     }
     public void RunToTarget(Vector3 position, float speed)
     {
@@ -55,5 +56,9 @@ public class SoldierController : MonoBehaviour
         var pos = SoldierTransform.position;
         pos.y = 0f;
         SoldierTransform.position = pos;
+    }
+    public void ChangeState(State<SoldierController> newState)
+    {
+        _stateMachine.ChangeState(newState);
     }
 }
