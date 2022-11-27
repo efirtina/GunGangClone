@@ -12,15 +12,26 @@ public class SoldierShooting : State<SoldierController>
     {
         if (other.CompareTag("Obstacle"))
         {
-            SoldierManager.Instance.RemoveSoldierFromList(Owner);
-            GameObject.Destroy(Owner.gameObject);
+            if (SoldierManager.Instance.GetSoldierCount() > 1)
+            {
+                SoldierManager.Instance.RemoveSoldierFromList(Owner);
+                GameObject.Destroy(Owner.gameObject);
+            }
+            else
+            {
+                GameManager.Instance.OnGameOver?.Invoke();
+                GameObject.Destroy(Owner.gameObject);
+            }
         }
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        SoldierManager.Instance.AddSoldierToList(Owner);
+        if (!SoldierManager.Instance.IsContains(Owner))
+        {
+            SoldierManager.Instance.AddSoldierToList(Owner);
+        }
         Owner.ResetYPosition();
         Owner.SoldierRigidbody.useGravity = false;
         Owner.SoldierRigidbody.constraints = RigidbodyConstraints.FreezeAll;

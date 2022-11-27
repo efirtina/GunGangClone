@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowTarget()
     {
+        if (_target == null) return;
         _cameraPosition = _target.position + _offset;
         _cameraPosition.x = 0f;
         _cameraTransform.position = Vector3.MoveTowards(_cameraTransform.position, _cameraPosition, Time.deltaTime * _followSpeed);

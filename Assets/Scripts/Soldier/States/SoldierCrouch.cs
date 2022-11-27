@@ -11,6 +11,16 @@ public class SoldierCrouch : State<SoldierController>
     {
         base.OnUpdate();
         Owner.RunToTarget(targetPosition);
+        if(Vector3.Distance(targetPosition, Owner.SoldierTransform.position) <= 0.05f)
+        {
+            StateMachine.ChangeState(Owner._crouchShootingState);
+        }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        SoldierManager.Instance.NumberOfSoldiersGotCover += 1;
     }
 
     public void SetTargetPosition(Vector3 newTarget)

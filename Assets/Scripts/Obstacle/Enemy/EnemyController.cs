@@ -1,14 +1,14 @@
 using DG.Tweening;
 using System;
-using TMPro;
 using UnityEngine;
 
 public class EnemyController : Obstacle
 {
     [SerializeField] private float _reachingTargetDuration;
     private Vector3 _targetPosition;
-    //private int _targetDirection;
     private Action OnReachedTarget;
+    private Vector3 _oldPosition;
+    private Vector3 _movingDirection;
 
     private void OnDisable()
     {
@@ -18,18 +18,35 @@ public class EnemyController : Obstacle
     public void OnSpawn(int targetDirection)
     {
         var level = LevelManager.Instance;
-        //_targetDirection = targetDirection;
+        _oldPosition = transform.position;
         if(targetDirection == 0)
         {
-            OnReachedTarget = MoveLeft;
+            OnReachedTarget = MoveRight;
             _targetPosition = Vector3.Lerp(level.GetLeftPoint(), level.GetRightPoint(), 0.25f);
         }
         else
         {
-            OnReachedTarget = MoveRight;
+            OnReachedTarget = MoveLeft;
             _targetPosition = Vector3.Lerp(level.GetLeftPoint(), level.GetRightPoint(), 0.75f);
         }
         Move();
+    }
+
+    private void LateUpdate()
+    {
+        _movingDirection = (transform.position - _oldPosition);
+        _oldPosition = transform.position;
+    }
+
+    protected override void Explode()
+    {
+        EnemyManager.Instance.OnEnemyKilled();
+        EnemyManager.Instance.RemoveEnemyFromList(this);
+        Destroy(this.gameObject);
+    }
+    public Vector3 GetMovingDirection()
+    {
+        return _movingDirection;
     }
 
     public void Move()
@@ -40,12 +57,12 @@ public class EnemyController : Obstacle
 
     private void MoveLeft()
     {
-        transform.DOMove(LevelManager.Instance.GetLeftPoint(), 3f)
+        transform.DOMove(LevelManager.Instance.GetLeftPoint(), 2.5f)
             .OnComplete(MoveRight);
     }
     private void MoveRight()
     {
-        transform.DOMove(LevelManager.Instance.GetRightPoint(), 3f)
+        transform.DOMove(LevelManager.Instance.GetRightPoint(), 2.5f)
             .OnComplete(MoveLeft);
     }
 }

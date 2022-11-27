@@ -27,11 +27,25 @@ public class SoldierFiring : MonoBehaviour
     {
         _shootTimer -= Time.deltaTime;
     }
-
+    public Vector3 GetGunPosition()
+    {
+        return _gunTransform.position;
+    }
+    public float GetGunYPosition()
+    {
+        return _gunTransform.position.y;
+    }
     public void Shoot()
     {
         if (_shootTimer > 0) return;
-        ProjectileManager.Instance.PullProjectile(_gunTransform.position);
+        ProjectileManager.Instance.PullProjectile(_gunTransform.position, out ProjectileController projectile);
+        _shootTimer = Cooldown;
+    }
+    public void Shoot(Vector3 direction)
+    {
+        if (_shootTimer > 0) return;
+        ProjectileManager.Instance.PullProjectile(_gunTransform.position, out ProjectileController projectile);
+        projectile.SetDirection(direction);
         _shootTimer = Cooldown;
     }
 }

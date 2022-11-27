@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class SoldierManager : MonoBehaviour
@@ -10,6 +11,24 @@ public class SoldierManager : MonoBehaviour
     private Transform _rightmostSoldier;
     public Action OnSoldierDestroy;
     public Action OnSoldierAdded;
+    public Action OnEverySoldierGotCover;
+
+    private int _numberOfSoldiersGotCover;
+    public int NumberOfSoldiersGotCover
+    {
+        get
+        {
+            return _numberOfSoldiersGotCover;
+        }
+        set
+        {
+            _numberOfSoldiersGotCover = value;
+            if(_numberOfSoldiersGotCover == _soldiers.Count)
+            {
+                OnEverySoldierGotCover?.Invoke();
+            }
+        }
+    }
 
     private void OnEnable()
     {
@@ -139,5 +158,15 @@ public class SoldierManager : MonoBehaviour
         {
             _soldiers[i].transform.SetParent(_soldiers[0].transform);
         }
+    }
+
+    public int GetSoldierCount()
+    {
+        return _soldiers.Count;
+    }
+
+    public bool CanLastGuyShoot()
+    {
+        return _soldiers.Count == NumberOfSoldiersGotCover;
     }
 }

@@ -642,6 +642,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1607493113}
     m_Modifications:
+    - target: {fileID: 8698726434963134931, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 46.56321
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698726434963134931, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 22.7837
+      objectReference: {fileID: 0}
     - target: {fileID: 8698726435062829322, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -689,6 +697,26 @@ PrefabInstance:
     - target: {fileID: 8698726435062829323, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755761777423635028, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: _spawnDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755761777423635028, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: _numberOfEnemiesToSpawn
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65498674
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.82744
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e418521ff2c17474aa5f40702358366e, type: 3}
