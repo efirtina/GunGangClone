@@ -34,6 +34,8 @@ public class PlayerShooting : SoldierShooting
         {
             _player = Owner.GetComponent<PlayerController>();
         }
+        Owner.SoldierAnimator.SetTrigger("Run");
+        
     }
 
     public override void OnUpdate()

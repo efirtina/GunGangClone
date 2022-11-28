@@ -51,20 +51,23 @@ public class EnemyController : Obstacle
     {
         return _movingDirection;
     }
-
+    
     public void Move()
     {
+        transform.DOLookAt(_targetPosition, _reachingTargetDuration / 4f, default);
         transform.DOMove(_targetPosition, _reachingTargetDuration)
             .OnComplete(OnReachedTarget.Invoke);
     }
 
     private void MoveLeft()
     {
+        transform.DOLookAt(LevelManager.Instance.GetLeftPoint(), _reachingTargetDuration / 4f, default);
         transform.DOMove(LevelManager.Instance.GetLeftPoint(), 2.5f)
             .OnComplete(MoveRight);
     }
     private void MoveRight()
     {
+        transform.DOLookAt(LevelManager.Instance.GetRightPoint(), _reachingTargetDuration / 4f, default);
         transform.DOMove(LevelManager.Instance.GetRightPoint(), 2.5f)
             .OnComplete(MoveLeft);
     }

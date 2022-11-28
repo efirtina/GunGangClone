@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class SoldierController : MonoBehaviour
@@ -18,6 +19,7 @@ public class SoldierController : MonoBehaviour
     [field: SerializeField] public SoldierCollision _soldierCollision { get; private set; }
     public Transform SoldierTransform { get; private set; }
     public Rigidbody SoldierRigidbody { get; private set; }
+    public Animator SoldierAnimator { get; private set; }
 
     private void OnEnable()
     {
@@ -27,12 +29,14 @@ public class SoldierController : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.OnGameOver -= ChangeStateToDefeatIdle;
+        transform.DOKill(false);
     }
 
     protected void Awake()
     {
         SoldierTransform = transform;
         SoldierRigidbody = GetComponent<Rigidbody>();
+        SoldierAnimator = GetComponent<Animator>();
     }
 
     protected virtual void Start()
@@ -67,6 +71,11 @@ public class SoldierController : MonoBehaviour
     {
         var direction = (position - transform.position).normalized;
         SoldierRigidbody.velocity = direction * speed;
+    }
+    public void RotateTo(Vector3 target)
+    {
+        var toRotation = Quaternion.FromToRotation(transform.forward, target);
+        SoldierTransform.rotation = Quaternion.Lerp(SoldierTransform.rotation, toRotation, Time.deltaTime * 4f);
     }
     public void ResetYPosition()
     {

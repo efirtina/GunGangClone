@@ -3,6 +3,17 @@ using UnityEngine;
 public class SoldierCrouchShooting : SoldierShooting
 {
     private bool _canShoot;
+    public bool CanShoot
+    {
+        set
+        {
+            _canShoot = value;
+            if (value)
+            {
+                Owner.SoldierAnimator.SetTrigger("Shoot");
+            }
+        }
+    }
     public SoldierCrouchShooting(StateMachine<SoldierController> stateMachine) : base(stateMachine)
     {
     }
@@ -10,15 +21,16 @@ public class SoldierCrouchShooting : SoldierShooting
     public override void OnEnter()
     {
         base.OnEnter();
-        _canShoot = SoldierManager.Instance.CanLastGuyShoot();
+        CanShoot = SoldierManager.Instance.CanLastGuyShoot();
         SoldierManager.Instance.OnEverySoldierGotCover += LetSoldierShoot;
         EnemyManager.Instance.OnAllEnemiesKilled += ShowMeWhatYouGot;
+        Owner.SoldierAnimator.SetTrigger("Idle");
     }
 
     public override void OnUpdate()
     {
         if (!_canShoot) return;
-        Owner.SoldierTransform.rotation = Quaternion.LookRotation(CalculateFacingDirection());
+        Owner.RotateTo(CalculateFacingDirection());
         _firing.DoCountdown();
         _firing.Shoot(CalculateProjectileDirection());
     }
@@ -61,6 +73,7 @@ public class SoldierCrouchShooting : SoldierShooting
     private void LetSoldierShoot()
     {
         _canShoot = true;
+        Owner.SoldierAnimator.SetTrigger("Shoot");
     }
 
     private void ShowMeWhatYouGot()

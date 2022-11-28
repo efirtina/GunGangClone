@@ -10,6 +10,7 @@ public class SoldierIdle : State<SoldierController>
     {
         base.OnEnter();
         Owner._soldierCollision.SetCollisionEnter(OnCollisionEnter);
+        Owner.SoldierAnimator.SetTrigger("Idle");
     }
 
     private void OnCollisionEnter(Collision other)

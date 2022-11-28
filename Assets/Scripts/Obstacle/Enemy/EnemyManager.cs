@@ -22,7 +22,6 @@ public class EnemyManager : MonoBehaviour
         set
         {
             _numberOfEnemiesKilled = value;
-            Debug.Log(value);
             if(_numberOfEnemiesKilled == _numberOfEnemiesToSpawn)
             {
                 OnAllEnemiesKilled?.Invoke();
@@ -60,7 +59,7 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < _numberOfEnemiesToSpawn; i++)
         {
-            var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+            var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.Euler(0,180f,0));
             enemy.OnSpawn(i % 2);
             _enemies.Add(enemy);
 

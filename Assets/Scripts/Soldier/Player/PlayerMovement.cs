@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_soldierManager == null) Debug.Log("ama nasil");
         _soldierManager.OnSoldierAdded += CalculateDiffs;
         _soldierManager.OnSoldierDestroy += CalculateDiffs;     
     }

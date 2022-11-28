@@ -12,6 +12,7 @@ public class SoldierRunning : State<SoldierController>
     public override void OnEnter()
     {
         base.OnEnter();
+        Owner.SoldierAnimator.SetTrigger("Run");
         var rigidbody = Owner.SoldierRigidbody;
         rigidbody.velocity = Vector3.zero;
         rigidbody.useGravity = false;
@@ -25,6 +26,12 @@ public class SoldierRunning : State<SoldierController>
         if (!other.CompareTag("Soldier")) return;
         if (!SoldierManager.Instance.IsContains(other.GetComponent<SoldierController>())) return;
         _isReachedToTarget = true;
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        Owner.RotateTo(Owner.SoldierTransform.position - SoldierManager.Instance.GetFirstSoldier().SoldierTransform.position);
     }
 
     public override void OnFixedUpdate()

@@ -1,4 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SoldierShooting : State<SoldierController>
 {
@@ -26,8 +28,10 @@ public class SoldierShooting : State<SoldierController>
     }
 
     public override void OnEnter()
-    {
+{
         base.OnEnter();
+        //Owner.SoldierAnimator.SetTrigger("Run");
+        Owner.SoldierTransform.DORotate(Vector3.zero, 0.5f, RotateMode.Fast);
         if (!SoldierManager.Instance.IsContains(Owner))
         {
             SoldierManager.Instance.AddSoldierToList(Owner);
