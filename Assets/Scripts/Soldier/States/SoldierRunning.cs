@@ -31,6 +31,10 @@ public class SoldierRunning : State<SoldierController>
     {
         base.OnFixedUpdate();
         Owner.RunToTarget(_targetTransform.position, 10f);
+        if(Vector3.Distance(_targetTransform.position,Owner.SoldierTransform.position) <= 1f)
+        {
+            _isReachedToTarget = true;
+        }
     }
 
     public override void OnExit()

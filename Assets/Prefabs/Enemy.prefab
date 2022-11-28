@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
-  _reachingTargetDuration: 1.5
+  _reachingTargetDuration: 2.5
 --- !u!1 &2877062369742322939
 GameObject:
   m_ObjectHideFlags: 0
