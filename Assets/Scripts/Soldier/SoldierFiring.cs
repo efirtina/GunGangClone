@@ -38,6 +38,7 @@ public class SoldierFiring : MonoBehaviour
     public void Shoot()
     {
         if (_shootTimer > 0) return;
+        if (!Input.GetKey(KeyCode.Space)) return;
         ProjectileManager.Instance.PullProjectile(_gunTransform.position, out ProjectileController projectile);
         _shootTimer = Cooldown;
     }
