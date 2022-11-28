@@ -1,17 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
     private List<EnemyController> _enemies;
-    private int _numberOfEnemiesKilled;
     [SerializeField] private int _numberOfEnemiesToSpawn;
     [SerializeField] private EnemyController _enemyPrefab;
     [SerializeField] private float _spawnDelay;
     private WaitForSeconds _coolDown;
+    public Action OnAllEnemiesKilled;
+    private int _numberOfEnemiesKilled;
+    public int NumberOfEnemiesKilled
+    {
+        get
+        {
+            return _numberOfEnemiesKilled;
+        }
+        set
+        {
+            _numberOfEnemiesKilled = value;
+            Debug.Log(value);
+            if(_numberOfEnemiesKilled == _numberOfEnemiesToSpawn)
+            {
+                OnAllEnemiesKilled?.Invoke();
+            }
+        }
+    }
 
     private void OnEnable()
     {
@@ -56,7 +73,7 @@ public class EnemyManager : MonoBehaviour
     }
     public void OnEnemyKilled()
     {
-        _numberOfEnemiesKilled += 1;
+        NumberOfEnemiesKilled += 1;
     }
     public Vector3 GetNextEnemyPosition()
     {

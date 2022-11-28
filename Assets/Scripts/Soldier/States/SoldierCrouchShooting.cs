@@ -12,6 +12,7 @@ public class SoldierCrouchShooting : SoldierShooting
         base.OnEnter();
         _canShoot = SoldierManager.Instance.CanLastGuyShoot();
         SoldierManager.Instance.OnEverySoldierGotCover += LetSoldierShoot;
+        EnemyManager.Instance.OnAllEnemiesKilled += ShowMeWhatYouGot;
     }
 
     public override void OnUpdate()
@@ -26,6 +27,16 @@ public class SoldierCrouchShooting : SoldierShooting
     {
         base.OnExit();
         SoldierManager.Instance.OnEverySoldierGotCover -= LetSoldierShoot;
+        EnemyManager.Instance.OnAllEnemiesKilled -= ShowMeWhatYouGot;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            EnemyManager.Instance.OnAllEnemiesKilled -= ShowMeWhatYouGot;
+        }
+        base.OnTriggerEnter(other);
     }
 
     private Vector3 CalculateProjectileDirection()
@@ -50,5 +61,10 @@ public class SoldierCrouchShooting : SoldierShooting
     private void LetSoldierShoot()
     {
         _canShoot = true;
+    }
+
+    private void ShowMeWhatYouGot()
+    {
+        Owner.ChangeState(Owner._danceState);
     }
 }

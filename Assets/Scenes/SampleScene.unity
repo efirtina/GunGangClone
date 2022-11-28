@@ -138,6 +138,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6324102322921398977, guid: b5a6ea1c0bbd4894fa8ef2d213cb3ba4, type: 3}
   m_PrefabInstance: {fileID: 1633637116}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &82747812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+  m_PrefabInstance: {fileID: 977720907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &133181607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6324102322921398977, guid: b5a6ea1c0bbd4894fa8ef2d213cb3ba4, type: 3}
@@ -1080,14 +1085,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1607493113}
     m_Modifications:
-    - target: {fileID: 8698726434963134931, guid: e418521ff2c17474aa5f40702358366e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100.80935
-      objectReference: {fileID: 0}
-    - target: {fileID: 8698726434963134931, guid: e418521ff2c17474aa5f40702358366e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 49.906
-      objectReference: {fileID: 0}
     - target: {fileID: 8698726435062829322, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -1136,25 +1133,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8755761777423635028, guid: e418521ff2c17474aa5f40702358366e, type: 3}
-      propertyPath: _spawnDelay
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755761777423635028, guid: e418521ff2c17474aa5f40702358366e, type: 3}
-      propertyPath: _numberOfEnemiesToSpawn
-      value: 6
-      objectReference: {fileID: 0}
+    - target: {fileID: 8698726435062829324, guid: e418521ff2c17474aa5f40702358366e, type: 3}
+      propertyPath: _endPlatform
+      value: 
+      objectReference: {fileID: 82747812}
     - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.65498674
+      value: 0.47643533
       objectReference: {fileID: 0}
     - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8976455226816667756, guid: e418521ff2c17474aa5f40702358366e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.82744
+      value: 0.738165
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e418521ff2c17474aa5f40702358366e, type: 3}

@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 _rightPoint;
     [SerializeField] private Transform _groundTransform;
     [SerializeField] private Transform _finishLine;
+    [SerializeField] private Transform _endPlatform;
     private bool _isSomeoneReachedFinish;
     private bool _canInvokeEvent = true;
     private float _minDistanceToFinish;
@@ -65,6 +66,15 @@ public class LevelManager : MonoBehaviour
     public Vector3 GetRightPoint()
     {
         return _rightPoint;
+    }
+
+    public Vector3 GetDanceFloorPosition()
+    {
+        return _endPlatform.position;
+    }
+    public float GetDanceFloorRadius()
+    {
+        return _groundTransform.lossyScale.x / 2f;
     }
 
     public void SetCrouchingPositionsAndChangeStates(List<SoldierController> soldiers)

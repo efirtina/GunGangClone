@@ -3,12 +3,17 @@ using UnityEngine;
 public class SoldierController : MonoBehaviour
 {
     protected StateMachine<SoldierController> _stateMachine;
+
+    #region States
     public SoldierIdle _idleState { get; private set; }
     public SoldierRunning _runningState { get; private set; }
     public SoldierShooting _shootingState { get; private set; }
     public SoldierCrouch _crouchingState { get; private set; }
     public SoldierCrouchShooting _crouchShootingState { get; private set; }
     public SoldierDefeatIdle _defeatIdle { get; private set; }
+    public WellDeservedDance _danceState { get; private set; }
+    #endregion
+
     [field: SerializeField] public SoldierFiring _soldierFiring { get; private set; }
     [field: SerializeField] public SoldierCollision _soldierCollision { get; private set; }
     public Transform SoldierTransform { get; private set; }
@@ -52,6 +57,7 @@ public class SoldierController : MonoBehaviour
         _crouchingState = new SoldierCrouch(_stateMachine);
         _defeatIdle = new SoldierDefeatIdle(_stateMachine);
         _crouchShootingState = new SoldierCrouchShooting(_stateMachine);
+        _danceState = new WellDeservedDance(_stateMachine);
     }
     public void RunToTarget(Vector3 position)
     {

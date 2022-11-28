@@ -9,6 +9,7 @@ public class EnemyController : Obstacle
     private Action OnReachedTarget;
     private Vector3 _oldPosition;
     private Vector3 _movingDirection;
+    private bool _isDead;
 
     private void OnDisable()
     {
@@ -40,8 +41,10 @@ public class EnemyController : Obstacle
 
     protected override void Explode()
     {
-        EnemyManager.Instance.OnEnemyKilled();
+        if (_isDead) return;
+        _isDead = true;
         EnemyManager.Instance.RemoveEnemyFromList(this);
+        EnemyManager.Instance.OnEnemyKilled();
         Destroy(this.gameObject);
     }
     public Vector3 GetMovingDirection()
