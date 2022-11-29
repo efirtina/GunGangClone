@@ -72,7 +72,14 @@ public class SoldierManager : MonoBehaviour
 
     public SoldierController GetFirstSoldier()
     {
-        return _soldiers[0];
+        if(_soldiers.Count > 0)
+        {
+            return _soldiers[0];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public bool IsContains(SoldierController soldier)

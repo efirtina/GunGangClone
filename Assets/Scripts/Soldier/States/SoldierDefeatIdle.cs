@@ -10,6 +10,7 @@ public class SoldierDefeatIdle : State<SoldierController>
     {
         base.OnEnter();
         Owner.SoldierRigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        Owner.SoldierAnimator.SetTrigger("Defeat");
         //do some sad stuff
     }
 

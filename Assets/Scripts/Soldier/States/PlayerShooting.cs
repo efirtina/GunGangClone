@@ -17,7 +17,7 @@ public class PlayerShooting : SoldierShooting
         if(victim == null)
         {
             GameManager.Instance.OnGameOver?.Invoke();
-            GameObject.Destroy(Owner);
+            GameObject.Destroy(Owner.gameObject);
             return;
         }
         _player._playerMovement.SetMovementVector(victim.transform.position);

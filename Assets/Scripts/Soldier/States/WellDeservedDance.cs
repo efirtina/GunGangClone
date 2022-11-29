@@ -59,7 +59,13 @@ public class WellDeservedDance : State<SoldierController>
     {
         Owner.SoldierAnimator.SetTrigger("Idle");
         Owner.SoldierTransform.DORotate(new Vector3(0f, 180f, 0f), 1f, RotateMode.Fast)
-            .OnComplete(() => { Owner.SoldierAnimator.SetTrigger("Dance"); });
+            .OnComplete(Win);
+    }
+
+    private void Win()
+    {
+        Owner.SoldierAnimator.SetTrigger("Dance");
+        GameManager.Instance.Win();
     }
 
 }
