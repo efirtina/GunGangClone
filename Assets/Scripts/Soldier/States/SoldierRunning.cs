@@ -17,7 +17,7 @@ public class SoldierRunning : State<SoldierController>
         rigidbody.velocity = Vector3.zero;
         rigidbody.useGravity = false;
         _targetTransform = SoldierManager.Instance.GetFirstSoldier().transform;
-        Owner._soldierCollision.SetTriggerEnter(OnTriggerEnter);
+        Owner._soldierCollision.SetTriggerStay(OnTriggerEnter);
         LevelManager.Instance.OnFinish += ChangeStateToIdle;
     }
 

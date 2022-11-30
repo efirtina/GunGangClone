@@ -47,8 +47,17 @@ public class SoldierCrouchShooting : SoldierShooting
         if (other.CompareTag("Obstacle"))
         {
             EnemyManager.Instance.OnAllEnemiesKilled -= ShowMeWhatYouGot;
+            if (SoldierManager.Instance.GetSoldierCount() > 1)
+            {
+                SoldierManager.Instance.RemoveSoldierFromList(Owner);
+                GameObject.Destroy(Owner.gameObject);
+            }
+            else
+            {
+                GameManager.Instance.OnGameOver?.Invoke();
+                GameObject.Destroy(Owner.gameObject);
+            }
         }
-        base.OnTriggerEnter(other);
     }
 
     private Vector3 CalculateProjectileDirection()
